@@ -53,7 +53,7 @@ const Navbar = () => {
           <h3 className="px-2 fs-1 font-weight-bold">Decentral</h3>
         </Link>
         {user ? (
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center login">
             <div className="px-4">
               <FaUser className="fs-5"/>
               <span className="px-1 fs-4">{user?.data?.result?.username}</span>

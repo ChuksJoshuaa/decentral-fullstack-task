@@ -85,3 +85,9 @@ body {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
+
+@media screen and (max-width: 460px){
+  .login {
+    padding-bottom: 0.5em;
+  }
+}

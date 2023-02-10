@@ -1,14 +1,32 @@
 import React, { useState } from "react";
+import * as api from "../api/index";
+import { useNavigate } from "react-router-dom";
 
 const EditProjectForm = ({ post }) => {
-    const [title, setTitle] = useState(post.title);
-    const [description, setDescription] = useState(post.description);
-    const [imageUrl, setImageUrl] = useState(post.imageUrl);
-    
+  const navigate = useNavigate();
+  const [title, setTitle] = useState(post.title);
+  const [description, setDescription] = useState(post.description);
+  const [imageUrl, setImageUrl] = useState(post.imageUrl);
 
-    const handleSubmit = () => {
-        console.log(title)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!title || !description || !imageUrl) {
+      return alert("All fields are required");
     }
+
+    const info = {
+      title: title,
+      description: description,
+      imageUrl: imageUrl,
+    };
+
+    try {
+      await api.updatePost(post._id, info);
+      navigate(`/`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -75,9 +93,10 @@ const EditProjectForm = ({ post }) => {
                   />
                 </div>
                 <button
-                  className="btn btn-primary"
-                  type="submit"
-                  data-bs-dismiss="modal"
+                    className="btn btn-primary"
+                    type="submit"
+                    data-bs-dismiss="modal"
+                    onClick={handleSubmit}
                 >
                   Submit
                 </button>
