@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Navbar, Footer } from "./components";
-import { Auth, SinglePage, Home, Post } from "./pages";
+import { Auth, SinglePage, Home, Post, UpdatePost } from "./pages";
 
 function App() {
   
@@ -19,6 +19,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/create-post" element={<Post />} />
           <Route path="/single-page/:id" element={<SinglePage />} />
+          <Route path="/update-post/:id" element={<UpdatePost />} />
         </Routes>
         <Footer />
       </Router>
