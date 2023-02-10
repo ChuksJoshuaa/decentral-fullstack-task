@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Lobster+Two&family=Cormorant+Garamond:wght@300&family=Open+Sans:wght@400;500;600;700&family=Racing+Sans+One&family=Rajdhani:wght@500&family=Roboto+Mono:wght@100&display=swap");
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Rajdhani", sans-serif;
+}
+
+.btn {
+  font-size: 15px;
+}
+
+.btn-primary,
+.bg-primary {
+  background-color: #df3ca6 !important;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #df3ca6;
+  opacity: 0.9;
+}
+
+.btn-info {
+  background-color: #7430f9;
+}
+
+.btn-info:hover {
+  background-color: #7430f9;
+  opacity: 0.9;
+}
+
+.cover-container {
+  min-height: 100vh;
+  padding-bottom: 2em;
+}
+
+
+.single-container {
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.single-form-container {
+  max-width: 700px;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+.footer {
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.footer span {
+  color: #222;
+}
+
+.footer h5 {
+  color: #222;
+  margin: 0.1rem;
+  text-transform: none;
+  line-height: 1.25;
+}
+
+@media (min-width: 776px) {
+  .footer {
+    flex-direction: row;
+  }
+
+}
+
+.delete-btn, 
+.edit-btn {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
