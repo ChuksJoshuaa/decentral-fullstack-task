@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as api from "../api/index";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "./index";
+import { Link } from "react-router-dom";
 
 const initialState = {
   title: "",
@@ -9,7 +10,7 @@ const initialState = {
   imageUrl: "",
 };
 
-const Form = () => {
+const UpdateForm = ({ id, post }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState("");
@@ -60,10 +61,9 @@ const Form = () => {
 
     try {
       setLoading(true);
-      await api.createPost(formData);
+      await api.updatePost(id, formData);
       setLoading(false);
-      // navigate("/");
-      navigate("/");
+      navigate(`/single-page/${id}`);
     } catch (error) {
       setLoading(false);
       setErrors("Something went wrong, try again");
@@ -86,6 +86,16 @@ const Form = () => {
       handleSubmit(e);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      setFormData({
+        title: post.title,
+        description: post.description,
+        imageUrl: post.imageUrl,
+      });
+    }
+  }, []);
 
   return (
     <div className="vh-100 mt-5 py-5 bg-white">
@@ -140,14 +150,24 @@ const Form = () => {
 
           <div className="pt-1 mb-4">
             <div className="d-flex">
-              <button
-                className="btn btn-dark btn-lg btn-block"
-                type="button"
-                onClick={handleSubmit}
-                onKeyDown={handleEnterKeyPress}
-              >
-                Submit
-              </button>
+              <div>
+                <button
+                  className="btn btn-dark btn-lg btn-block"
+                  type="button"
+                  onClick={handleSubmit}
+                  onKeyDown={handleEnterKeyPress}
+                >
+                  Submit
+                </button>
+                <Link
+                  className="mb-4 text-decoration-none px-2"
+                  to={`/single-page/${id}`}
+                >
+                  <button className="btn btn-danger btn-lg">
+                    Go Back
+                  </button>
+                </Link>
+              </div>
               {loading && (
                 <div className="px-3">
                   <Loader />
@@ -161,4 +181,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default UpdateForm;
