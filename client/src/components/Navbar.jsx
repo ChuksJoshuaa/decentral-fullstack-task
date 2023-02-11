@@ -56,7 +56,7 @@ const Navbar = () => {
           <div className="d-flex align-items-center login">
             <div className="px-4">
               <FaUser className="fs-5"/>
-              <span className="px-1 fs-4">{user?.data?.result?.username}</span>
+              <span className="px-1 fs-4 text-capitalize">{user?.data?.result?.username}</span>
             </div>
             <div className="">
               <button className="btn btn-secondary btn-lg fs-5" onClick={handleLogout}>Logout</button>

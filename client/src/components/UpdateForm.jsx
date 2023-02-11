@@ -64,17 +64,16 @@ const UpdateForm = ({ id, post }) => {
       await api.updatePost(id, formData);
       setLoading(false);
       navigate(`/single-page/${id}`);
+      setFormData({
+        title: "",
+        description: "",
+        imageUrl: "",
+      });
     } catch (error) {
       setLoading(false);
       setErrors("Something went wrong, try again");
       console.log(error);
     }
-
-    setFormData({
-      title: "",
-      description: "",
-      imageUrl: "",
-    });
 
     setLoading(false);
     setErrors("");
@@ -82,7 +81,7 @@ const UpdateForm = ({ id, post }) => {
 
   const handleEnterKeyPress = (e) => {
     e.preventDefault();
-    if (e.key === "Enter" || e.code !== undefined || e.keyCode === 13) {
+    if (e.key === "Enter" || e.keyCode === 13) {
       handleSubmit(e);
     }
   };
