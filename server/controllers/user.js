@@ -63,7 +63,7 @@ export const signin = async (req, res) => {
     }
 
     if (!isPasswordCorrect) {
-      res.status(400).json({ msg: "Invalid Password" });
+      return res.status(400).json({ msg: "Invalid Password" });
     }
 
     const token = getToken(oldUser);

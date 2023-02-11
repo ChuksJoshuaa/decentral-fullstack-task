@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useState } from "react";
 import { imageLogo } from "../utils/image";
 import { useNavigate } from "react-router-dom";
-import * as api from "../api/index"
+import * as api from "../api/index";
 import { Loader } from "../components";
 
 const initialState = {
-  username:"",
+  username: "",
   email: "",
   password: "",
   repeatPassword: "",
@@ -13,37 +13,48 @@ const initialState = {
 
 const Auth = () => {
   const navigate = useNavigate();
-  const [isSignup, setIsSignup] = useState(false)
-  const [errors, setErrors] = useState('')
+  const [isSignup, setIsSignup] = useState(false);
+  const [errors, setErrors] = useState("");
+  const [authError, setAuthError] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [repeatPasswordError, setRepeatPasswordError] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-
-  const handleChange =  (e) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
 
-  const switchMode = () => {
-    setIsSignup((prevIsSignup) => !prevIsSignup);
-    setErrors("")
-    setLoading(false)
+  const errorCheck = () => {
+    setErrors("");
+    setLoading(false);
+    setAuthError(false)
+    setUsernameError(false);
+    setEmailError(false);
+    setPasswordError(false);
+    setRepeatPasswordError(false);
   }
 
+  const switchMode = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+    errorCheck();
+    setFormData(initialState)
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    errorCheck();
 
     if (isSignup) {
       if (!formData.username) {
-         setErrors("This field is required");
-         setUsernameError(true);
-         return;
+        setErrors("This field is required");
+        setUsernameError(true);
+        return;
       }
-      
+
       if (formData.username) {
         setErrors("");
         setUsernameError(false);
@@ -97,87 +108,82 @@ const Auth = () => {
         return;
       }
 
+      try {
+        setLoading(true);
+        const { data } = await api.signUp(formData);
+        localStorage.setItem("profile", JSON.stringify({ data }));
+        setLoading(false);
+        navigate("/");
+        setFormData({
+          username: "",
+          email: "",
+          password: "",
+          repeatPassword: "",
+        });
+      } catch (error) {
+        setLoading(false);
+        setAuthError(true);
+        console.log(error);
+      }
+    } else {
+      if (!formData.email) {
+        setErrors("Please enter your email");
+        setEmailError(true);
+        return;
+      }
+      if (
+        formData.email.match(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        ) === null
+      ) {
+        setErrors("Please enter a valid email");
+        setEmailError(true);
+        return;
+      }
+
+      if (formData.email) {
+        setErrors("");
+        setEmailError(false);
+      }
+
+      if (!formData.password) {
+        setErrors("This field is required");
+        setPasswordError(true);
+        return;
+      }
+
+      if (formData.password) {
+        setErrors("");
+        setPasswordError(false);
+      }
 
       try {
-          setLoading(true)
-          const { data } = await api.signUp(formData);
-          localStorage.setItem("profile", JSON.stringify({ data }));
-          setLoading(false);
-          navigate("/");
-      } catch (error) {
-          setLoading(false)
-          setErrors("Signup unsuccessful, try again later")
-          console.log(error);
-       } 
-      
-       setFormData({
-         username: "",
-         email: "",
-         password: "",
-         repeatPassword: "",
-       });
-
-    }
-
-    else {
-       if (!formData.email) {
-         setErrors("Please enter your email");
-         setEmailError(true);
-         return;
-       }
-       if (
-         formData.email.match(
-           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-         ) === null
-       ) {
-         setErrors("Please enter a valid email");
-         setEmailError(true);
-         return;
-       }
-
-       if (formData.email) {
-         setErrors("");
-         setEmailError(false);
-       }
-
-       if (!formData.password) {
-         setErrors("This field is required");
-         setPasswordError(true);
-         return;
-       }
-
-       if (formData.password) {
-         setErrors("");
-         setPasswordError(false);
-       }
-      
-      try {
-          setLoading(true)
-          const { data } = await api.signIn(formData);
-          localStorage.setItem("profile", JSON.stringify({ data }));
-          setLoading(false)
-          navigate("/");
-      } catch (error) {
-          setLoading(false);
-          setErrors("Login unsuccessful, try again later");
-          console.log(error);
-        } 
+        setLoading(true);
+        const { data } = await api.signIn(formData);
+        localStorage.setItem("profile", JSON.stringify({ data }));
+        setLoading(false);
+        navigate("/");
         setFormData({
           email: "",
           password: "",
         });
+      } catch (error) {
+        setLoading(false);
+        setAuthError(true);
+        console.log(error);
+      }
     }
 
     setErrors("");
     setLoading(false);
-  }
+  };
 
-    const handleEnterKeyPress = (e) => {
-      e.preventDefault();
-      if (e.key === "Enter" || e.code !== undefined || e.keyCode === 13) {
-        handleSubmit(e);
-      }
-    };
+  const handleEnterKeyPress = (e) => {
+    e.preventDefault();
+    if (e.key === "Enter" || e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
 
   return (
     <section className="vh-100 bg-light">
@@ -218,9 +224,15 @@ const Auth = () => {
                           : "Create a new account"}
                       </h5>
 
-                      <p className="text-danger text-center fw-bold fs-6">
+                      <p className="text-danger text-center fw-bold fs-4">
                         {errors}
                       </p>
+
+                      {authError ? (
+                        <p className="text-danger text-center fw-bold fs-4">
+                          {!isSignup ? 'Authentication error: Invalid email or password': 'Authentication error, Try again!!'}
+                        </p>
+                      ) : null}
 
                       {isSignup && (
                         <div className="form-outline mb-4">
@@ -327,6 +339,6 @@ const Auth = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Auth
+export default Auth;
