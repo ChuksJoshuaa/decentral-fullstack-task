@@ -1,4 +1,4 @@
-# Decentral FullStack Task
+# Decentral Full-Stack Application Task
 
 <img src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1676099230/Screenshot_2023-02-11_at_08.04.48_nbnmcx.png" title="icon" alt="icon">
 
