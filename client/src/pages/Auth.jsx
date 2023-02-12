@@ -186,8 +186,8 @@ const Auth = () => {
   };
 
   return (
-    <section className="vh-100 bg-light">
-      <div className="container py-3 h-100">
+    <section className="bg-light cover-container py-5">
+      <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
             <div className="card" style={{ borderRadius: "1rem" }}>
@@ -229,7 +229,7 @@ const Auth = () => {
                       </p>
 
                       {authError ? (
-                        <p className="text-danger text-center fw-bold fs-4">
+                        <p className="text-danger text-center fw-medium fs-5">
                           {!isSignup ? 'Authentication error: Invalid email or password': 'Authentication error, Try again!!'}
                         </p>
                       ) : null}
