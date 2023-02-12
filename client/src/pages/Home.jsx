@@ -54,17 +54,19 @@ const Home = () => {
     );
   }
 
-
   return (
     <div className="cover-container">
       {postData.length > 0 ? (
         <div className="container mt-4">
-          <Link
-            className="mb-4 text-decoration-none"
-            to={`${user ? "/create-post" : "/auth"}`}
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={() =>
+              (window.location.href = `${user ? "/create-post" : "/auth"}`)
+            }
           >
-            <button className="btn btn-primary btn-lg">Create Post</button>
-          </Link>
+            Create Post
+          </button>
+
           <div className="row mt-3">
             {postData.map((item) => (
               <div className="col-sm-4" key={item._id}>
