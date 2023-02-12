@@ -1,10 +1,10 @@
-
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import rateLimiter from "express-rate-limit";
 import cors from "cors";
+import { getUrl } from "./constant.js";
 
 import { connectDB, configDb } from "./db/connect.js";
 
@@ -27,7 +27,7 @@ app.set("trust proxy", 1);
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000,
-    max: 100, 
+    max: 100,
   })
 );
 
@@ -46,15 +46,17 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
 
 const start = async () => {
-    try {
-        configDb();
-        await connectDB(process.env.MONGO_URI);
-        app.listen(port, () =>
-        console.log(`Server is listening on port ${port}...`)
-        );
+  try {
+    configDb();
+    await connectDB(getUrl());
+    app.listen(port, () =>
+      console.log(`Server is listening on port: ${port} and Url: ${getUrl()}...`)
+    );
   } catch (error) {
     console.log(error);
   }
 };
 
 start();
+
+export default app;
