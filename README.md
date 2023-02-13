@@ -150,36 +150,39 @@ Success
 - Method: POST
 - Body
 
-  ```
- {
-    "title": "yes",
-    "description": "yes",
-    "imageUrl": "yes"
- }
-  ```
+
+```
+   {
+      "title": "yes",
+      "description": "yes",
+      "imageUrl": "yes"
+   }
+```
+
 
 - Responses
 - Response Status: 200 OK
 
 Success
 
-```
 
- {
-    "newPost": {
-        "title": "yes",
-        "description": "yes",
-        "imageUrl": "yes",
-        "authorId": "63e481a63504a0752f4dffae",
-        "authorName": "Joshua",
-        "_id": "63e5fcdae4a3d7f505a2c309",
-        "createdAt": "2023-02-10T08:14:18.841Z",
-        "updatedAt": "2023-02-10T08:14:18.841Z",
-        "__v": 0
-    }
-}
 
 ```
+   {
+      "newPost": {
+          "title": "yes",
+          "description": "yes",
+          "imageUrl": "yes",
+          "authorId": "63e481a63504a0752f4dffae",
+          "authorName": "Joshua",
+          "_id": "63e5fcdae4a3d7f505a2c309",
+          "createdAt": "2023-02-10T08:14:18.841Z",
+          "updatedAt": "2023-02-10T08:14:18.841Z",
+          "__v": 0
+      }
+  }
+```
+
 
 ### Get All Posts
 
@@ -190,6 +193,8 @@ Success
 - Response Status: 200 OK
 
 Success
+
+
 
 ```
 {
@@ -209,8 +214,8 @@ Success
 
     "count": 1
 }
-
 ```
+
 
 ### Get Single Post
 
@@ -222,8 +227,9 @@ Success
 
 Success
 
-```
 
+
+```
 {
     "post": {
         "_id": "63e514ddfd5d17447baf4748",
@@ -237,8 +243,8 @@ Success
         "__v": 0
     }
 }
-
 ```
+
 
 ### Update Post
 
@@ -246,6 +252,9 @@ Success
 - Method: PATCH
 
 - Body
+
+
+
 
 ```
  {
@@ -260,8 +269,9 @@ Success
 
 Success
 
-```
 
+
+```
 {
     "_id": "63e514ddfd5d17447baf4748",
     "title": "Natural language processing for contracts",
@@ -273,7 +283,6 @@ Success
     "updatedAt": "2023-02-11T07:27:44.485Z",
     "__v": 0
 }
-
 ```
 
 
@@ -287,10 +296,10 @@ Success
 
 Success
 
+
+
 ```
-
-Post has been deleted successfully
-
+  Post has been deleted successfully
 ```
 
 
