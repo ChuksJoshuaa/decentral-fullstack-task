@@ -158,13 +158,14 @@ Success
  }
   ```
 
+
 - Responses
 - Response Status: 200 OK
 
 Success
 
-```
 
+```
  {
     "newPost": {
         "title": "yes",
@@ -178,8 +179,8 @@ Success
         "__v": 0
     }
 }
-
 ```
+
 
 ### Get All Posts
 
@@ -190,6 +191,8 @@ Success
 - Response Status: 200 OK
 
 Success
+
+
 
 ```
 {
@@ -209,8 +212,8 @@ Success
 
     "count": 1
 }
-
 ```
+
 
 ### Get Single Post
 
@@ -222,8 +225,9 @@ Success
 
 Success
 
-```
 
+
+```
 {
     "post": {
         "_id": "63e514ddfd5d17447baf4748",
@@ -237,8 +241,8 @@ Success
         "__v": 0
     }
 }
-
 ```
+
 
 ### Update Post
 
@@ -246,6 +250,9 @@ Success
 - Method: PATCH
 
 - Body
+
+
+
 
 ```
  {
@@ -260,8 +267,9 @@ Success
 
 Success
 
-```
 
+
+```
 {
     "_id": "63e514ddfd5d17447baf4748",
     "title": "Natural language processing for contracts",
@@ -273,7 +281,6 @@ Success
     "updatedAt": "2023-02-11T07:27:44.485Z",
     "__v": 0
 }
-
 ```
 
 
@@ -287,10 +294,10 @@ Success
 
 Success
 
+
+
 ```
-
 Post has been deleted successfully
-
 ```
 
 
