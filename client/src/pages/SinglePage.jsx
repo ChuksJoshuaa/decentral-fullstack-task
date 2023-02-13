@@ -13,6 +13,7 @@ const SinglePage = () => {
   const [postData, setPostData] = useState({});
   const user = JSON.parse(localStorage.getItem("profile"));
 
+
   const getPost = async () => {
     try {
       setLoading(true);
@@ -34,6 +35,7 @@ const SinglePage = () => {
     }
   };
 
+
   const deletePostButton = async (id) => {
     try {
       await api.deletePost(id);
@@ -42,6 +44,7 @@ const SinglePage = () => {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
     getPost();

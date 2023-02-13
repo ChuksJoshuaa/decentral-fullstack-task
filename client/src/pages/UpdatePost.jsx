@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import { UpdateForm, Loader } from "../components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { serverUrl } from "../utils/serverUrl";
 
 const UpdatePost = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [postData, setPostData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const CheckUser = () => {
+    const user = JSON.parse(localStorage.getItem("profile"));
+    if (!user) {
+      navigate("/auth");
+    }
+  };
 
   const getPost = async () => {
     try {
@@ -29,6 +37,10 @@ const UpdatePost = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    CheckUser();
+  });
 
   useEffect(() => {
     if (id) {
@@ -56,7 +68,11 @@ const UpdatePost = () => {
 
   const checkData = Object.keys(postData).length;
 
-    return <div>{checkData > 0 ? <UpdateForm post={postData} id={postData._id} /> : null}</div>;
+  return (
+    <div>
+      {checkData > 0 ? <UpdateForm post={postData} id={postData._id} /> : null}
+    </div>
+  );
 };
 
 export default UpdatePost;
