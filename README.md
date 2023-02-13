@@ -150,13 +150,14 @@ Success
 - Method: POST
 - Body
 
-  ```
- {
-    "title": "yes",
-    "description": "yes",
-    "imageUrl": "yes"
- }
-  ```
+
+```
+   {
+      "title": "yes",
+      "description": "yes",
+      "imageUrl": "yes"
+   }
+```
 
 
 - Responses
@@ -165,20 +166,21 @@ Success
 Success
 
 
+
 ```
- {
-    "newPost": {
-        "title": "yes",
-        "description": "yes",
-        "imageUrl": "yes",
-        "authorId": "63e481a63504a0752f4dffae",
-        "authorName": "Joshua",
-        "_id": "63e5fcdae4a3d7f505a2c309",
-        "createdAt": "2023-02-10T08:14:18.841Z",
-        "updatedAt": "2023-02-10T08:14:18.841Z",
-        "__v": 0
-    }
-}
+   {
+      "newPost": {
+          "title": "yes",
+          "description": "yes",
+          "imageUrl": "yes",
+          "authorId": "63e481a63504a0752f4dffae",
+          "authorName": "Joshua",
+          "_id": "63e5fcdae4a3d7f505a2c309",
+          "createdAt": "2023-02-10T08:14:18.841Z",
+          "updatedAt": "2023-02-10T08:14:18.841Z",
+          "__v": 0
+      }
+  }
 ```
 
 
@@ -297,7 +299,7 @@ Success
 
 
 ```
-Post has been deleted successfully
+  Post has been deleted successfully
 ```
 
 
